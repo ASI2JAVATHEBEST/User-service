@@ -1,10 +1,10 @@
-package com.cpe.springboot.user.controller;
+package com.cpe.springboot.controller;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.cpe.springboot.user.model.UserModel;
+import com.cpe.springboot.model.UserModel;
 
 public interface UserRepository extends CrudRepository<UserModel, Integer> {
 	

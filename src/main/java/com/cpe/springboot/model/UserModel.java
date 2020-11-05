@@ -1,4 +1,4 @@
-package com.cpe.springboot.user.model;
+package com.cpe.springboot.model;
 
 import com.cpe.springboot.card.model.CardModel;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
