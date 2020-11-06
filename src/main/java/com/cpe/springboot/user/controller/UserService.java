@@ -1,26 +1,15 @@
 package com.cpe.springboot.user.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import com.cpe.springboot.http.HttpClient;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.cpe.springboot.card.model.CardModel;
 import com.cpe.springboot.user.model.UserModel;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 public class UserService {
