@@ -31,6 +31,11 @@ public class UserModel implements Serializable {
 	private String surName;
 	private String email;
 
+
+	@OneToMany(cascade = CascadeType.ALL,
+			mappedBy = "user")
+	private Set<CardModel> cardList = new HashSet<>();
+
 	public UserModel() {
 		this.login = "";
 		this.pwd = "";
