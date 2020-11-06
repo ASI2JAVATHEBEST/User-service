@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.cpe.springboot.http.HttpClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +46,10 @@ public class UserService {
 	public void addUser(UserModel user) {
 		// needed to avoid detached entity passed to persist error
 		userRepository.save(user);
-		RestTemplate restTemplate = new RestTemplate();
-		final String url = "http://localhost:8082/cards_rand";
-		ResponseEntity<CardModel[]> responseEntity = restTemplate.getForEntity(url, CardModel[].class);
-		CardModel[] cardList = responseEntity.getBody();
+
+		HttpClient httpClient = new HttpClient();
+		List<CardModel> cardList = httpClient.getRandCards();
+
 		for(CardModel card: cardList) {
 			user.addCard(card);
 		}
