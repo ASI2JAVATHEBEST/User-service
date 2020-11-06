@@ -1,4 +1,4 @@
-package com.cpe.springboot.controller;
+package com.cpe.springboot.user.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.cpe.springboot.model.UserModel;
+import com.cpe.springboot.user.model.UserModel;
 
 //ONLY FOR TEST NEED ALSO TO ALLOW CROOS ORIGIN ON WEB BROWSER SIDE
 @CrossOrigin

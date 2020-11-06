@@ -1,4 +1,4 @@
-package com.cpe.springboot.controller;
+package com.cpe.springboot.user.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,18 +7,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cpe.springboot.card.Controller.CardModelService;
 import com.cpe.springboot.card.model.CardModel;
-import com.cpe.springboot.model.UserModel;
+import com.cpe.springboot.user.model.UserModel;
 
 @Service
 public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
-	@Autowired
-	private CardModelService cardModelService;
+
 
 	public List<UserModel> getAllUsers() {
 		List<UserModel> userList = new ArrayList<>();

@@ -1,4 +1,4 @@
-package com.cpe.springboot.model;
+package com.cpe.springboot.user.model;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package com.cpe.springboot.model;
+package com.cpe.springboot.user.model;
 
 import com.cpe.springboot.card.model.CardModel;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -30,12 +30,6 @@ public class UserModel implements Serializable {
 	private String lastName;
 	private String surName;
 	private String email;
-
-
-	@OneToMany(cascade = CascadeType.ALL,
-			mappedBy = "user")
-	//@OneToMany(mappedBy = "user")
-	private Set<CardModel> cardList = new HashSet<>();
 
 	public UserModel() {
 		this.login = "";
