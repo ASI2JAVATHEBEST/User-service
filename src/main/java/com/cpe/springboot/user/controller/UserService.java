@@ -5,11 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 import com.cpe.springboot.http.HttpClient;
+import com.cpe.springboot.user.bus.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 
 import com.cpe.springboot.card.model.CardModel;
 import com.cpe.springboot.user.model.UserModel;
+
+import javax.jms.Message;
 
 @Service
 public class UserService {
@@ -17,6 +21,8 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	BusService busService;
 
 	public List<UserModel> getAllUsers() {
 		List<UserModel> userList = new ArrayList<>();
@@ -39,9 +45,8 @@ public class UserService {
 		HttpClient httpClient = new HttpClient();
 		List<CardModel> cardList = httpClient.getRandCards();
 
-		for(CardModel card: cardList) {
-			user.addCard(card);
-		}
+		busService.sendUser(user,"channelUserToCard");
+
 		userRepository.save(user);
 	}
 
@@ -58,6 +63,15 @@ public class UserService {
 		List<UserModel> ulist=null;
 		ulist=userRepository.findByLoginAndPwd(login,pwd);
 		return ulist;
+	}
+
+	@JmsListener(destination = "channelCardToUser", containerFactory = "connectionFactory")
+	public void receiveUser(UserModel user, Message message) {
+
+		System.out.println("[BUSLISTENER] [CHANNEL RESULT_BUS_MNG] RECEIVED String MSG=["+user.toString()+"]");
+
+		userRepository.save(user);
+
 	}
 
 }

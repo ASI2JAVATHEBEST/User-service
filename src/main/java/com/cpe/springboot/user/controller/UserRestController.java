@@ -3,6 +3,7 @@ package com.cpe.springboot.user.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.cpe.springboot.user.bus.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,7 @@ import com.cpe.springboot.user.model.UserModel;
 @CrossOrigin
 @RestController
 public class UserRestController {
-	
+
 	@Autowired
 	private UserService userService;
 	
@@ -56,6 +57,6 @@ public class UserRestController {
 		}
 		return false;
 	}
-	
+
 
 }
