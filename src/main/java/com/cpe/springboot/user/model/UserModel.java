@@ -9,26 +9,29 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+@Table(name = "user_model")
 public class UserModel implements Serializable {
 
 	private static final long serialVersionUID = 2733795832476568049L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Integer id;
+	@Column(name = "login")
 	private String login;
+	@Column(name = "pwd")
 	private String pwd;
+	@Column(name = "account")
 	private float account;
+	@Column(name = "last_name")
 	private String lastName;
+	@Column(name = "sur_name")
 	private String surName;
+	@Column(name = "email")
 	private String email;
 
 
