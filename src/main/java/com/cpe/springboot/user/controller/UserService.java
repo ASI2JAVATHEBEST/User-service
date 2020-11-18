@@ -1,9 +1,6 @@
 package com.cpe.springboot.user.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import com.cpe.springboot.http.HttpClient;
 import com.cpe.springboot.user.bus.BusService;
@@ -69,7 +66,34 @@ public class UserService {
 
 		System.out.println("[BUSLISTENER] [CHANNEL RESULT_BUS_MNG] RECEIVED String MSG=["+user.toString()+"]");
 
-//		userRepository.save(user);
+		Integer id = (Integer)user.get("userId");
+
+		Optional<UserModel> u = getUser(id);
+		if(!u.isPresent()){
+			return;
+		}
+
+		UserModel userModel =u.get();
+
+		List<Map> cardMap = (List)user.get("cardMap");
+
+		Set<CardModel> cardList = new HashSet<>();
+
+		for(Map<String, Object> cardModelMap: cardMap) {
+			CardModel cardModel = new CardModel();
+			cardModel.setId((Integer)cardModelMap.get("id"));
+			cardModel.setEnergy((float)cardModelMap.get("energy"));
+			cardModel.setHp((float)cardModelMap.get("hp"));
+			cardModel.setDefence((float)cardModelMap.get("defence"));
+			cardModel.setAttack((float)cardModelMap.get("attack"));
+			cardModel.setPrice((float)cardModelMap.get("price"));
+			cardModel.setUser(userModel);
+			cardList.add(cardModel);
+		}
+
+		userModel.setCardList(cardList);
+
+		userRepository.save(userModel);
 
 	}
 
