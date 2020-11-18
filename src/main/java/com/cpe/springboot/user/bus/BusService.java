@@ -21,8 +21,8 @@ public class BusService {
         jmsTemplate.convertAndSend(busName,msg);
     }
 
-    public void sendUser(UserModel user, String busName) {
-        System.out.println("[BUSSERVICE] SEND String MSG=["+user.toString()+"] to Bus=["+user.toString()+"]");
-        jmsTemplate.convertAndSend(busName,user);
+    public void sendUser(Integer userId, String busName) {
+        System.out.println("[BUSSERVICE] SEND String MSG=["+userId+"] to Bus=["+busName+"]");
+        jmsTemplate.convertAndSend(busName,userId);
     }
 }

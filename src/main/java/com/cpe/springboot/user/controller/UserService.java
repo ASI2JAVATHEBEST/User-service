@@ -2,6 +2,7 @@ package com.cpe.springboot.user.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.cpe.springboot.http.HttpClient;
@@ -42,12 +43,10 @@ public class UserService {
 		// needed to avoid detached entity passed to persist error
 		userRepository.save(user);
 
-		HttpClient httpClient = new HttpClient();
-		List<CardModel> cardList = httpClient.getRandCards();
+//		HttpClient httpClient = new HttpClient();
+//		List<CardModel> cardList = httpClient.getRandCards();
 
-		busService.sendUser(user,"channelUserToCard");
-
-		userRepository.save(user);
+		busService.sendUser(user.getId(),"channelUserToCard");
 	}
 
 	public void updateUser(UserModel user) {
@@ -66,11 +65,11 @@ public class UserService {
 	}
 
 	@JmsListener(destination = "channelCardToUser", containerFactory = "connectionFactory")
-	public void receiveUser(UserModel user, Message message) {
+	public void receiveUser(Map user, Message message) {
 
 		System.out.println("[BUSLISTENER] [CHANNEL RESULT_BUS_MNG] RECEIVED String MSG=["+user.toString()+"]");
 
-		userRepository.save(user);
+//		userRepository.save(user);
 
 	}
 
