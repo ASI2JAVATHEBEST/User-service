@@ -11,13 +11,10 @@ public class UserDisplay {
 	private String pwd;
     private Set<Integer> cardList = new HashSet<>();
     
-    public UserDisplay(UserModel user) {
+    public UserDisplay(UserEntityModel user) {
     	this.id=user.getId();
     	this.login=user.getLogin();
     	this.pwd=user.getPwd();
-    	for( CardModel card: user.getCardList()) {
-    	this.cardList.add(card.getId());	
-    	}
 	}
 
 	public Integer getId() {

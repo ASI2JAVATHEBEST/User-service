@@ -1,6 +1,5 @@
 package com.cpe.springboot.user.bus;
 
-import com.cpe.springboot.user.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;

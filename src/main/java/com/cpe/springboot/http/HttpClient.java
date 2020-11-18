@@ -1,7 +1,7 @@
 package com.cpe.springboot.http;
 
 import com.cpe.springboot.card.model.CardModel;
-import com.cpe.springboot.user.model.UserModel;
+import com.cpe.springboot.user.model.UserEntityModel;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -33,20 +33,20 @@ public class HttpClient {
         return responseEntity.getBody();
     }
 
-    public UserModel getUserById(final Integer id) {
+    public UserEntityModel getUserById(final Integer id) {
         RestTemplate restTemplate = new RestTemplate();
 
         final String url = "http://localhost:8084/user/"+id;
-        ResponseEntity<UserModel> responseEntity = restTemplate.getForEntity(url, UserModel.class);
+        ResponseEntity<UserEntityModel> responseEntity = restTemplate.getForEntity(url, UserEntityModel.class);
         return responseEntity.getBody();
     }
 
-    public void updateUser(UserModel user, Integer id) {
+    public void updateUser(UserEntityModel user, Integer id) {
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<UserModel> request = new HttpEntity<>(user);
+        HttpEntity<UserEntityModel> request = new HttpEntity<>(user);
 
         final String url = "http://localhost:8084/user/"+id;
-        restTemplate.exchange(url, HttpMethod.PUT, request, UserModel.class);
+        restTemplate.exchange(url, HttpMethod.PUT, request, UserEntityModel.class);
     }
 
     public void updateCard(CardModel card, Integer id) {

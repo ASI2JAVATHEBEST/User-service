@@ -1,20 +1,20 @@
 package com.cpe.springboot.user.model;
 
 import com.cpe.springboot.card.model.CardModel;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import javax.persistence.*;
 
 @Entity
 @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Table(name = "user_model")
-public class UserModel implements Serializable {
+public class UserEntityModel implements Serializable {
 
 	private static final long serialVersionUID = 2733795832476568049L;
 	@Id
@@ -34,12 +34,7 @@ public class UserModel implements Serializable {
 	@Column(name = "email")
 	private String email;
 
-
-	@OneToMany(cascade = CascadeType.ALL,
-			mappedBy = "user")
-	private Set<CardModel> cardList = new HashSet<>();
-
-	public UserModel() {
+	public UserEntityModel() {
 		this.login = "";
 		this.pwd = "";
 		this.lastName="lastname_default";
@@ -47,7 +42,7 @@ public class UserModel implements Serializable {
 		this.email="email_default";
 	}
 
-	public UserModel(String login, String pwd) {
+	public UserEntityModel(String login, String pwd) {
 		super();
 		this.login = login;
 		this.pwd = pwd;
@@ -80,31 +75,18 @@ public class UserModel implements Serializable {
 		this.pwd = pwd;
 	}
 
-	public Set<CardModel> getCardList() {
-		return cardList;
-	}
-
-	public void setCardList(Set<CardModel> cardList) {
-		this.cardList = cardList;
-	}
-
-	public void addAllCardList(Collection<CardModel> cardList) {
-		this.cardList.addAll(cardList);
-	}
-
-
-	public void addCard(CardModel card) {
-		this.cardList.add(card);
-		card.setUser(this);
-	}
-
-	private boolean checkIfCard(CardModel c){
-		for(CardModel c_c: this.cardList){
-			if(c_c.getId()==c.getId()){
-				return true;
-			}
-		}
-		return false;
+	public UserModel asUserModel(){
+		UserModel userModel = new UserModel();
+		userModel.setId(this.getId());
+		userModel.setLogin(this.getLogin());
+		userModel.setPwd(this.getPwd());
+		userModel.setAccount(this.getAccount());
+		userModel.setLastName(this.getLastName());
+		userModel.setSurName(this.getSurName());
+		userModel.setEmail(this.getEmail());
+		HashSet<Integer> cardListInt = new HashSet<>();
+		userModel.setCardList(cardListInt);
+		return userModel;
 	}
 
 	public float getAccount() {

@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.cpe.springboot.user.model.UserModel;
+import com.cpe.springboot.user.model.UserEntityModel;
 
-public interface UserRepository extends CrudRepository<UserModel, Integer> {
+public interface UserRepository extends CrudRepository<UserEntityModel, Integer> {
 	
-	List<UserModel> findByLoginAndPwd(String login,String pwd);
+	List<UserEntityModel> findByLoginAndPwd(String login, String pwd);
 
 }
