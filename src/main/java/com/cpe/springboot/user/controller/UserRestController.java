@@ -35,8 +35,9 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/user")
-	public void addUser(@RequestBody UserModel user) {
-		userService.addUser(user);
+	public int addUser(@RequestBody UserModel user) {
+		UserModel userModel = userService.addUser(user);
+		return userModel.getId();
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT,value="/user/{id}")
@@ -51,11 +52,11 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/auth")
-	private boolean getAllCourses(@RequestParam("login") String login, @RequestParam("pwd") String pwd) {
+	private int getAllCourses(@RequestParam("login") String login, @RequestParam("pwd") String pwd) {
 		if( userService.getUserByLoginPwd(login,pwd).size() > 0) {
-			return true;
+			return userService.getUserByLoginPwd(login, pwd).iterator().next().getId();
 		}
-		return false;
+		return 0;
 	}
 
 

@@ -36,7 +36,7 @@ public class UserService {
 		return userRepository.findById(id);
 	}
 
-	public void addUser(UserModel user) {
+	public UserModel addUser(UserModel user) {
 		// needed to avoid detached entity passed to persist error
 		userRepository.save(user);
 
@@ -44,6 +44,8 @@ public class UserService {
 //		List<CardModel> cardList = httpClient.getRandCards();
 
 		busService.sendUser(user.getId(),"channelUserToCard");
+
+		return user;
 	}
 
 	public void updateUser(UserModel user) {
